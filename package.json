@@ -1,0 +1,26 @@
+{
+  "name": "pdf-service",
+  "version": "1.0.0",
+  "description": "Serverless AWS Lambda function for generating invoice pdfs for the company Typeflow e.U.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/type-flow/pdf-service-aws.git"
+  },
+  "keywords": [
+    "AWS",
+    "lambda",
+    "serverless",
+    "node",
+    "pdf"
+  ],
+  "author": "Lukas Holzer <lukas.holzer@typeflow.cc>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/type-flow/pdf-service-aws/issues"
+  },
+  "homepage": "https://github.com/type-flow/pdf-service-aws#readme"
+}
