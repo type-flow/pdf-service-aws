@@ -4,7 +4,8 @@
   "description": "Serverless AWS Lambda function for generating invoice pdfs for the company Typeflow e.U.",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "serverless offline start",
+    "deploy": "serverless deploy -v "
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/type-flow/pdf-service-aws/issues"
   },
-  "homepage": "https://github.com/type-flow/pdf-service-aws#readme"
+  "homepage": "https://github.com/type-flow/pdf-service-aws#readme",
+  "devDependencies": {
+    "serverless-offline": "^3.16.0"
+  }
 }
