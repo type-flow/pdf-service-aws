@@ -9,8 +9,16 @@ functions:
     handler: handler.hello
     events:
       - http:
-          path: hello
-          method: get
+          path: generate
+          method: get #post
+          cors: true
 
 plugins:
+  - serverless-plugin-typescript
   - serverless-offline
+
+package:
+  exclude:
+    - node_modules/**/*
+  include:
+    handler.ts
