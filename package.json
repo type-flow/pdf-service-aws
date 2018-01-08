@@ -26,7 +26,14 @@
   "homepage": "https://github.com/type-flow/pdf-service-aws#readme",
   "devDependencies": {
     "@types/aws-lambda": "0.0.24",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/node-fetch": "^1.6.7",
     "serverless-offline": "^3.16.0",
     "serverless-plugin-typescript": "^1.1.5"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.179.0",
+    "html-pdf-chrome": "^0.4.1",
+    "node-fetch": "^2.0.0-alpha.9"
   }
 }
