@@ -16,13 +16,13 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    generate: api/pdf.generate
     environment:
       BUCKET: ${self:custom.bucket}
     events:
       - http:
-          path: generate
-          method: post
+          path: generate/{$id}
+          method: get
           cors: true
 
 plugins:
