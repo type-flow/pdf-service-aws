@@ -3,6 +3,6 @@ node_modules
 jspm_packages
 
 # Serverless directories
-.serverless
+.serverless/
 # typescript
-.build
+.build/
