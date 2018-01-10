@@ -22,7 +22,7 @@ functions:
     events:
       - http:
           path: generate
-          method: get #post
+          method: post
           cors: true
 
 plugins:

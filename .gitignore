@@ -7,3 +7,4 @@ jspm_packages
 # typescript
 /.build
 .build/*
+.build/handler.js
