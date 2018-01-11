@@ -2,12 +2,15 @@ service: pdf-service
 
 custom:
   bucket: pdf-invoice-generator
+  webpack: ./config/webpack.config.js  
+  webpackIncludeModules: true
+
 
 provider:
   name: aws
   runtime: nodejs6.10
   stage: dev
-  region: us-west-1
+  # region: us-west-1
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -15,8 +18,8 @@ provider:
       Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
-  hello:
-    generate: api/pdf.generate
+  generate:
+    handler: api/pdf.generate
     environment:
       BUCKET: ${self:custom.bucket}
     events:
@@ -26,11 +29,12 @@ functions:
           cors: true
 
 plugins:
-  - serverless-plugin-typescript
+  - serverless-webpack
   - serverless-offline
 
-package:
-  exclude:
-    - node_modules/**/*
-  include:
-    handler.ts
+
+# package:
+#   exclude:
+#     - node_modules/**/*
+#   include:
+#     handler.ts
