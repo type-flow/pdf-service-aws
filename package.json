@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "start": "serverless offline start",
-    "deploy": "serverless deploy -v "
+    "deploy": "serverless deploy -v ",
+    "invoke": "serverless invoke local --function generate -l --path calls/generate.json"
   },
   "repository": {
     "type": "git",
@@ -25,15 +26,21 @@
   },
   "homepage": "https://github.com/type-flow/pdf-service-aws#readme",
   "devDependencies": {
-    "@types/aws-lambda": "0.0.24",
-    "@types/aws-sdk": "^2.7.0",
-    "@types/node-fetch": "^1.6.7",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "serverless": "^1.25.0",
     "serverless-offline": "^3.16.0",
-    "serverless-plugin-typescript": "^1.1.5"
+    "serverless-webpack": "^4.2.0",
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "aws-sdk": "^2.179.0",
-    "html-pdf-chrome": "^0.4.1",
-    "node-fetch": "^2.0.0-alpha.9"
+    "html-pdf-chrome": "^0.4.1"
   }
 }
