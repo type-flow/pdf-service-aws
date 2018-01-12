@@ -1,7 +1,7 @@
 service: pdf-service
 
 custom:
-  bucket: pdf-invoice-generator
+  bucket: pdf-service-upload
   webpack: ./config/webpack.config.js  
   webpackIncludeModules: true
 
@@ -11,6 +11,7 @@ provider:
   runtime: nodejs6.10
   stage: dev
   # region: us-west-1
+
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -20,13 +21,12 @@ provider:
 functions:
   generate:
     handler: api/pdf.generate
-    environment:
-      BUCKET: ${self:custom.bucket}
     events:
       - http:
           path: generate/{$id}
           method: get
           cors: true
+          authorizer: aws_iam
 
 plugins:
   - serverless-webpack
