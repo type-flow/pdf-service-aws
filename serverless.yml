@@ -10,13 +10,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   stage: dev
-  # region: us-west-1
-
-  # iamRoleStatements:
-  #   - Effect: Allow
-  #     Action:
-  #       - s3:PutObject
-  #     Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+  region: us-west-1
 
 functions:
   generate:
