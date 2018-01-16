@@ -17,7 +17,7 @@ functions:
     handler: api/pdf.generate
     events:
       - http:
-          path: generate/{$id}
+          path: generate/{id}
           method: get
           cors: true
 
