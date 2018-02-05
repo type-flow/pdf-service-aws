@@ -9,8 +9,17 @@ provider:
   runtime: nodejs6.10
   stage: ${self:custom.stage}
   region: eu-west-1
-  # apiKeys:
-  #   - ${self:custom.stage}-chromeless-session-key
+  apiKeys:
+    - ${self:custom.stage}-chromeless-session-key
 
+functions:
+  generate:
+    handler: api/pdf.main
+    events:
+      - http:
+          path: generate
+          method: get
+          cors: true
+          
 plugins:
   - serverless-plugin-typescript

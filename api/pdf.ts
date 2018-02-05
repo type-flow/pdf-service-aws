@@ -1,5 +1,5 @@
 import { Context, Callback } from 'aws-lambda';
-import { Chromeless } from 'chromeless';
+import Chromeless from 'chromeless';
 import { success, failure } from './libs/response.lib';
 
 import { IPdfOptions } from './interfaces/pdf.interface';
@@ -7,6 +7,8 @@ import { IPdfOptions } from './interfaces/pdf.interface';
 
 export async function main(event: any, context: Context, callback: Callback) {
 
+
+  const url = 'https://github.com/graphcool/chromeless';
   const pdfOptions: IPdfOptions = {
     landscape: false,
     displayHeaderFooter: false,
@@ -20,27 +22,27 @@ export async function main(event: any, context: Context, callback: Callback) {
     marginRight: 0  
   }
 
-  const chromeless = new Chromeless({
-    remote: {
-      endpointUrl: 'https://neqq4t4bvf.execute-api.eu-west-1.amazonaws.com/dev/generate',
-      apiKey: 'jADd06KFfXkU8uDgiLRl2bdfIhx5ZuPUIEIMde00'
-    }
-  });
-
   try {
-    const screenshot = await chromeless
-      .goto('http://www.lukasholzer.com')
+    const chromeless = new Chromeless({
+      remote: {
+        endpointUrl: 'https://neqq4t4bvf.execute-api.eu-west-1.amazonaws.com/dev/generate',
+        apiKey: 'jADd06KFfXkU8uDgiLRl2bdfIhx5ZuPUIEIMde00'
+      }
+    });
+
+    const pdf = await chromeless
+      .goto(url)
       .pdf(pdfOptions);
 
-    callback(null, success(screenshot));
-  } catch( e ) {
-    callback(null, failure({
-      status: false,
-      error: `Couldn\'t create PDF`,
-      debug: { stackTrace: e }
-    }));
-  }
+      callback(null, success(pdf));
 
-    
-  await chromeless.end();
+      await chromeless.end();
+        
+    } catch(e) {
+      callback(null, failure({
+        status: false,
+        error: `Couldn\'t create PDF`,
+        debug: { stackTrace: e}
+      }));
+    }
 }
