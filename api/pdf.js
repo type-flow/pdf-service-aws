@@ -1,11 +1,8 @@
-import * as htmlPdf from 'html-pdf-chrome';
 import * as path from 'path';
 import fs from 'fs';
+import { Chromeless } from 'chromeless';
 
 import { success, failure } from './libs/response';
-
-const options = {
-};
 
 export async function generate(event, context, callback) {
 
@@ -14,21 +11,26 @@ export async function generate(event, context, callback) {
     return callback(new Error('Couldn\'t create the todo item.'));
   }
  
-  const pdfFilename = `${event.options.filename}.${event.options.filetype}`;
-  const pdfPath = path.join(process.cwd(), 'pdf');
+  // const pdfFilename = `${event.options.filename}.${event.options.filetype}`;
 
-  if (!fs.existsSync(pdfPath)) {
-    fs.mkdirSync(pdfPath, '0775');
-  }
+  const chromeless = new Chromeless({ remote: true })
+  const pdf = await chromeless
+    .goto(event.options.url)
+    .pdf({
+      landscape: false,
+      displayHeaderFooter: false,
+      printBackground: false,
+      scale: 1,
+      paperWidth: 8.27,
+      paperHeight: 11.69,
+      marginTop: 0,
+      marginBottom: 0,
+      marginLeft: 0,
+      marginRight: 0
+  })
 
-  const file = path.join(pdfPath, pdfFilename);
-  
-  await htmlPdf.create(event.options.url, options)
-    .then(pdf => pdf.toFile(file))
-    .catch(error => {
-      console.error(error);
-      return callback(new Error('Couldn\'t generate the PDF.'));
-    });
+  console.log(pdf) // prints local file path or S3 URL
 
-    callback(null, success({"pdf": file}));
+  await chromeless.end()
+    callback(null, success({"pdf": pdf}));
 };

@@ -4,7 +4,7 @@
   "description": "Serverless AWS Lambda function for generating invoice pdfs for the company Typeflow e.U.",
   "main": "handler.js",
   "scripts": {
-    "start": "serverless offline start",
+    "start": "serverless start",
     "deploy": "serverless deploy -v ",
     "invoke": "serverless invoke local --function generate -l --path calls/generate.json"
   },
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.179.0",
-    "html-pdf-chrome": "^0.4.1"
+    "chromeless": "^1.5.0",
+    "serverless-plugin-chrome": "^1.0.0-35"
   }
 }
