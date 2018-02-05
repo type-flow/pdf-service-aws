@@ -5,8 +5,8 @@ custom:
   webpack: ./config/webpack.config.js  
   webpackIncludeModules: true
   stage: dev
-  debug: false # "*" for all outputs
-  awsIotHost: ${env:AWS_IOT_HOST}
+  # debug: false # "*" for all outputs
+  # awsIotHost: ${env:AWS_IOT_HOST}
   chrome:
     functions:
       - run
@@ -16,40 +16,40 @@ provider:
   runtime: nodejs6.10
   stage: ${self:custom.stage}
   region: eu-west-1
-  environment:
-    DEBUG: ${self:custom.debug}
-    AWS_IOT_HOST: ${self:custom.awsIotHost}
+  # environment:
+  #   DEBUG: ${self:custom.debug}
+    # AWS_IOT_HOST: ${self:custom.awsIotHost}
   apiKeys:
     - ${self:custom.stage}-chromeless-session-key
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "iot:Connect"
-        - "iot:Publish"
-        - "iot:Subscribe"
-        - "iot:Receive"
-        - "iot:GetThingShadow"
-        - "iot:UpdateThingShadow"
-      Resource: "*"
-    - Effect: "Allow"
-      Action:
-        - s3:*
-      Resource:
-        Fn::Join:
-          - ""
-          - - "arn:aws:s3:::"
-            - Ref: AWS::AccountId
-            - "-"
-            - Ref: AWS::Region
-            - -chromeless
-            - /*
+  # iamRoleStatements:
+  #   - Effect: "Allow"
+  #     Action:
+  #       - "iot:Connect"
+  #       - "iot:Publish"
+  #       - "iot:Subscribe"
+  #       - "iot:Receive"
+  #       - "iot:GetThingShadow"
+  #       - "iot:UpdateThingShadow"
+  #     Resource: "*"
+  #   - Effect: "Allow"
+  #     Action:
+  #       - s3:*
+  #     Resource:
+  #       Fn::Join:
+  #         - ""
+  #         - - "arn:aws:s3:::"
+  #           - Ref: AWS::AccountId
+  #           - "-"
+  #           - Ref: AWS::Region
+  #           - -chromeless
+  #           - /*
 
 functions:
   generate:
-    handler: api/pdf.generate
+    handler: api/pdf.main
     events:
       - http:
-          path: generate/{id}
+          path: generate
           method: get
           cors: true
   # run:
@@ -75,17 +75,10 @@ functions:
   #         - DomainName
 
 plugins:
-  - serverless-plugin-chrome
-  - serverless-offline
-  - serverless-webpack
+  - serverless-plugin-typescript
 
-# plugins:
-#   - serverless-plugin-typescript
-#   - serverless-plugin-chrome
-#   - serverless-offline
-
-# package:
-#   exclude:
-#     - node_modules/**/*
-#   include:
-#     handler.ts
+package:
+  exclude:
+    - node_modules/**/*
+  include:
+    - api/*

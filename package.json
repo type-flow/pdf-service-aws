@@ -25,23 +25,17 @@
     "url": "https://github.com/type-flow/pdf-service-aws/issues"
   },
   "homepage": "https://github.com/type-flow/pdf-service-aws#readme",
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-3": "^6.24.1",
-    "serverless": "^1.25.0",
-    "serverless-offline": "^3.16.0",
-    "serverless-webpack": "^4.2.0",
-    "ts-loader": "^3.2.0",
-    "typescript": "^2.6.2",
-    "webpack": "^3.10.0",
-    "webpack-node-externals": "^1.6.0"
-  },
   "dependencies": {
     "aws-sdk": "^2.179.0",
     "chromeless": "^1.5.0",
     "serverless-plugin-chrome": "^1.0.0-35"
+  },
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/node": "^9.4.0",
+    "serverless": "^1.25.0",
+    "serverless-offline": "^3.16.0",
+    "serverless-plugin-typescript": "^1.1.5",
+    "typescript": "^2.6.2"
   }
 }
