@@ -1,85 +1,16 @@
 service: pdf-service
 
 custom:
-  bucket: pdf-service-upload
-  webpack: ./config/webpack.config.js  
-  webpackIncludeModules: true
+  bucket: pdf-service-upload 
   stage: dev
-  # debug: false # "*" for all outputs
-  # awsIotHost: ${env:AWS_IOT_HOST}
-  chrome:
-    functions:
-      - run
 
 provider:
   name: aws
   runtime: nodejs6.10
   stage: ${self:custom.stage}
   region: eu-west-1
-  # environment:
-  #   DEBUG: ${self:custom.debug}
-    # AWS_IOT_HOST: ${self:custom.awsIotHost}
-  apiKeys:
-    - ${self:custom.stage}-chromeless-session-key
-  # iamRoleStatements:
-  #   - Effect: "Allow"
-  #     Action:
-  #       - "iot:Connect"
-  #       - "iot:Publish"
-  #       - "iot:Subscribe"
-  #       - "iot:Receive"
-  #       - "iot:GetThingShadow"
-  #       - "iot:UpdateThingShadow"
-  #     Resource: "*"
-  #   - Effect: "Allow"
-  #     Action:
-  #       - s3:*
-  #     Resource:
-  #       Fn::Join:
-  #         - ""
-  #         - - "arn:aws:s3:::"
-  #           - Ref: AWS::AccountId
-  #           - "-"
-  #           - Ref: AWS::Region
-  #           - -chromeless
-  #           - /*
-
-functions:
-  generate:
-    handler: api/pdf.main
-    events:
-      - http:
-          path: generate
-          method: get
-          cors: true
-  # run:
-  #   memorySize: 1536
-  #   timeout: 300
-  #   handler: src/run.default
-  #   events:
-  #     - iot:
-  #         sql: "SELECT * FROM 'chrome/new-session'"
-  #   environment:
-  #     CHROMELESS_S3_BUCKET_NAME:
-  #       Fn::Join:
-  #         - ""
-  #         - - Ref: AWS::AccountId
-  #           - "-"
-  #           - Ref: AWS::Region
-  #           - -chromeless
-  #     CHROMELESS_S3_OBJECT_KEY_PREFIX: ""
-  #     CHROMELESS_S3_OBJECT_ACL: "public-read"
-  #     CHROMELESS_S3_BUCKET_URL:
-  #       Fn::GetAtt:
-  #         - Bucket
-  #         - DomainName
+  # apiKeys:
+  #   - ${self:custom.stage}-chromeless-session-key
 
 plugins:
   - serverless-plugin-typescript
-
-package:
-  excludeDevDependencies: false
-  exclude:
-    - node_modules/**/*
-  include:
-    - api/*
