@@ -26,16 +26,17 @@
   },
   "homepage": "https://github.com/type-flow/pdf-service-aws#readme",
   "dependencies": {
-    "aws-sdk": "^2.179.0",
+    "aws-sdk": "^2.188.0",
     "chromeless": "^1.5.0",
     "serverless-plugin-chrome": "^1.0.0-35"
   },
   "devDependencies": {
+    "@types/aws-lambda": "0.0.31",
     "@types/aws-sdk": "^2.7.0",
     "@types/node": "^9.4.0",
-    "serverless": "^1.25.0",
+    "serverless": "^1.26.0",
     "serverless-offline": "^3.16.0",
     "serverless-plugin-typescript": "^1.1.5",
-    "typescript": "^2.6.2"
+    "typescript": "^2.7.1"
   }
 }

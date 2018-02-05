@@ -78,6 +78,7 @@ plugins:
   - serverless-plugin-typescript
 
 package:
+  excludeDevDependencies: false
   exclude:
     - node_modules/**/*
   include:
